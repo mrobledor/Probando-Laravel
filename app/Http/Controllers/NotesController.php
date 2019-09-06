@@ -11,7 +11,7 @@ class NotesController extends Controller
 
     public function getIndex(){
       // Conseguir notas
-      $notes = DB::table('notes')->get();
+      $notes = DB::table('notes')->orderBy('id','desc')->get();
 
       return view('notes.index', array(
         "notes"=>$notes
@@ -39,4 +39,10 @@ class NotesController extends Controller
     public function getSaveNote(){
       return view('notes.saveNote');
     }
-}
+    public function getDeleteNote($id){
+      //Eliminar una nota concreta
+      $note = DB::table('notes')->where('id',$id)->delete();
+
+        return redirect()->action('NotesController@getIndex')->with('status','Nota borrada con exito');
+      }
+  }
