@@ -18,7 +18,7 @@ class NotesController extends Controller
       ));
 
     }
-    public function getNotes($id){
+    public function getNote($id){
       //Conseguir una nota concreta
       $note = DB::table('notes')->select('id','title','description')->where('id',$id)->first();
 
@@ -28,5 +28,15 @@ class NotesController extends Controller
       return view('notes.note', array(
         'note'=>$note
       ));
+    }
+    public function postNote(Request $request){
+    $note= DB::table('notes')->insert(array(
+        'title'=>$request->input('title'),
+        'description'=>$request->input('description')
+      ));
+      return redirect()->action('NotesController@getIndex');
+    }
+    public function getSaveNote(){
+      return view('notes.saveNote');
     }
 }
