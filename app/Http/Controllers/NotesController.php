@@ -18,4 +18,15 @@ class NotesController extends Controller
       ));
 
     }
+    public function getNotes($id){
+      //Conseguir una nota concreta
+      $note = DB::table('notes')->select('id','title','description')->where('id',$id)->first();
+
+      if(empty($note)){
+        return redirect()->action('NotesController@getIndex');
+      }
+      return view('notes.note', array(
+        'note'=>$note
+      ));
+    }
 }
