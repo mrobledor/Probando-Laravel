@@ -33,3 +33,4 @@ Route::get('/naranjas/{admin?}',['middleware' =>'EsAdmin',
 Route::get('/peras','FrutasController@anyPeras');
 });
 Route::POST('/recibir','FrutasController@recibirFormulario');
+Route::controller('notas', 'NotesController');
